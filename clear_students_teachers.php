@@ -64,7 +64,7 @@ try {
             http_response_code(400);
             throw new RuntimeException('درخواست معتبر نیست. صفحه را تازه‌سازی کنید.');
         }
-        if (($_POST['confirm_phrase'] ?? '') !== 'حذف شاگردان و آموزگاران') {
+        if (strtoupper(trim((string)($_POST['confirm_phrase'] ?? ''))) !== 'DELETE STUDENTS AND TEACHERS') {
             throw new RuntimeException('برای تأیید، عبارت خواسته‌شده را دقیق وارد کنید.');
         }
         if (($_POST['confirm_backup'] ?? '') !== 'yes') {
@@ -168,8 +168,8 @@ try {
 <form method="post" autocomplete="off">
 <input type="hidden" name="csrf_token" value="<?=cleanup_h(csrf_token())?>">
 <label class="cleanup-check"><input type="checkbox" name="confirm_backup" value="yes" required><span>تأیید می‌کنم که از پایگاه داده پشتیبان SQL گرفته‌ام.</span></label>
-<label class="cleanup-field">برای تأیید، این عبارت را دقیق وارد کنید:
-<input type="text" name="confirm_phrase" required autocomplete="off" placeholder="حذف شاگردان و آموزگاران"></label>
+<label class="cleanup-field">برای تأیید، این عبارت انگلیسی را وارد کنید (English confirmation phrase):
+<input type="text" name="confirm_phrase" required autocomplete="off" placeholder="DELETE STUDENTS AND TEACHERS"></label>
 <button class="cleanup-submit" type="submit">حذف تمام شاگردان و آموزگاران</button>
 </form>
 </section>
