@@ -644,3 +644,11 @@ html[dir="rtl"] input:focus-visible,html[dir="rtl"] select:focus-visible,html[di
 
 .field-validation-message{display:block;margin:5px 0 0;color:#b42332;font-size:13px;line-height:1.7;font-weight:600}
 html[dir="rtl"] [aria-invalid="true"]{border-color:#b42332!important;box-shadow:0 0 0 3px rgb(180 35 50 / 10%)!important}
+
+
+/* Login page background: blue theme */
+html body.login-page {
+  background-color: #1557b8;
+  background-image: linear-gradient(135deg, #1d63c5 0%, #124a9e 55%, #0d3678 100%);
+  background-attachment: fixed;
+}
