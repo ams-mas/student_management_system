@@ -185,6 +185,10 @@ try {
             $insertPayment = $pdo->prepare('INSERT INTO student_fee_payments (charge_id, amount, receipt_number, payment_method, received_at, notes, received_by) VALUES (?, ?, ?, ?, ?, ?, ?)');
 
             $studentCount = 0;
+            $targetStudentCount = 5000;
+            $baseStudentsPerClass = intdiv($targetStudentCount, 36);
+            $extraStudentsClasses = $targetStudentCount % 36;
+            $classIndex = 0;
             $paymentCount = 0;
             $fullPaymentCount = 0;
             $partialPaymentCount = 0;
@@ -199,7 +203,9 @@ try {
             for ($grade = 1; $grade <= 12; $grade++) {
                 foreach ($sectionNames as $sectionName) {
                     $sectionId = $sections[$grade][$sectionName];
-                    for ($numberInClass = 1; $numberInClass <= 25; $numberInClass++) {
+                    $studentsInClass = $baseStudentsPerClass + ($classIndex < $extraStudentsClasses ? 1 : 0);
+                    $classIndex++;
+                    for ($numberInClass = 1; $numberInClass <= $studentsInClass; $numberInClass++) {
                         $isFemale = random_int(0, 1) === 1;
                         $firstName = demo_pick($isFemale ? $girls : $boys);
                         $lastName = demo_pick($lastNames);
@@ -326,7 +332,7 @@ try {
 <h2>اطلاعاتی که ساخته می‌شود</h2>
 <div class="demo-grid">
 <div class="demo-stat">صنف‌ها<strong>۳۶ صنف</strong><small>پایه اول تا دوازدهم، هر پایه الف، ب و ج</small></div>
-<div class="demo-stat">شاگردان<strong>۹۰۰ شاگرد</strong><small>۲۵ شاگرد در هر صنف</small></div>
+<div class="demo-stat">شاگردان<strong>۵۰۰۰ شاگرد</strong><small>در هر صنف ۱۳۸ یا ۱۳۹ شاگرد</small></div>
 <div class="demo-stat">آموزگاران<strong>۱۲ آموزگار</strong><small>هر آموزگار چند صنف را پوشش می‌دهد</small></div>
 <div class="demo-stat">فیس سالانه<strong>۵۰۰۰ / ۶۰۰۰ / ۷۰۰۰</strong><small>بر اساس پایه تحصیلی</small></div>
 </div>
@@ -351,7 +357,7 @@ try {
 </div>
 <?php endif; ?>
 <?php else: ?>
-<div class="demo-alert warn"><strong>توجه:</strong> این عملیات ۹۰۰ شاگرد، ۳۶ صنف، ۱۲ آموزگار و سوابق فیس/پرداخت نمونه ایجاد می‌کند. اطلاعات فعلی حذف نمی‌شود؛ اما سال تحصیلی آزمایشی فعال می‌شود تا صفحات سیستم داده‌های نمونه را نمایش دهند. سال قبلی در سوابق باقی می‌ماند و بعداً می‌توانید آن را دوباره فعال کنید. برای جلوگیری از داده‌های تکراری، این صفحه فقط یک بار قابل اجرا است.</div>
+<div class="demo-alert warn"><strong>توجه:</strong> این عملیات ۵۰۰۰ شاگرد، ۳۶ صنف، ۱۲ آموزگار و سوابق فیس/پرداخت نمونه ایجاد می‌کند. اطلاعات فعلی حذف نمی‌شود؛ اما سال تحصیلی آزمایشی فعال می‌شود تا صفحات سیستم داده‌های نمونه را نمایش دهند. سال قبلی در سوابق باقی می‌ماند و بعداً می‌توانید آن را دوباره فعال کنید. برای جلوگیری از داده‌های تکراری، این صفحه فقط یک بار قابل اجرا است.</div>
 <form method="post">
 <input type="hidden" name="csrf_token" value="<?=demo_h(csrf_token())?>">
 <label class="demo-check"><input type="checkbox" name="confirm_demo" value="yes" required><span>تأیید می‌کنم که می‌خواهم اطلاعات آزمایشی در پایگاه داده فعلی وارد شود.</span></label>
