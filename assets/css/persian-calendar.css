@@ -1,0 +1,53 @@
+
+/* Shared Persian Solar Hijri date picker */
+.persian-calendar-popup{position:relative;z-index:1000;width:min(320px,100%);padding:12px;background:#fff;border:1px solid #d7deea;border-radius:12px;box-shadow:0 14px 36px rgba(15,23,42,.18);margin-top:4px;color:#17233b}
+.persian-calendar-popup[hidden]{display:none}
+.pc-head,.pc-foot{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:10px}
+.pc-head button,.pc-foot button,.pc-days button{font:inherit;cursor:pointer;border:0;border-radius:7px;padding:7px 9px;background:#eef2f8;color:#17233b}
+.pc-head button{font-size:20px;min-width:36px}
+.pc-title{font-size:14px}
+.pc-week,.pc-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center}
+.pc-week{margin-bottom:5px;color:#64748b;font-size:12px}
+.pc-days button{padding:8px 0;background:#f8fafc}
+.pc-days button:hover{background:#dbeafe}
+.pc-days button.is-selected{background:#2449a5;color:#fff}
+.pc-days button.is-today{outline:2px solid #16a34a;outline-offset:-2px}
+.pc-empty{min-height:34px}
+.pc-foot{margin:10px 0 0;flex-wrap:wrap}
+.pc-foot button{font-size:12px}
+
+/* Direct year/month selection: avoid clicking through years one month at a time. */
+.pc-selectors{display:flex;align-items:center;gap:5px;flex:1;justify-content:center;min-width:0}
+.pc-selectors select{font:inherit;max-width:58%;min-width:0;padding:7px 5px;border:1px solid #cbd5e1;border-radius:7px;background:#f8fafc;color:#17233b;cursor:pointer}
+.pc-selectors .pc-year-select{max-width:42%;}
+.pc-head{gap:5px}
+
+/* Overlay the date picker so opening it never pushes or scrolls the page layout. */
+.persian-calendar-container{position:relative;width:100%;min-width:0}
+.persian-calendar-container .persian-calendar-popup{position:absolute;top:calc(100% + 4px);right:0;left:auto;margin-top:0;z-index:10000;max-width:min(340px,calc(100vw - 32px));}
+
+/* Improve spacing and prevent date-picker text from touching borders or clipping. */
+.persian-calendar-popup{box-sizing:border-box;padding:14px;line-height:1.5;overflow:visible}
+.persian-calendar-popup *{box-sizing:border-box}
+.pc-head{gap:8px;margin-bottom:12px}
+.pc-head button{flex:0 0 36px;padding:6px;line-height:1.4}
+.pc-selectors{gap:8px}
+.pc-selectors select{height:40px;padding:7px 10px;line-height:1.4;text-align:center}
+.pc-selectors .pc-month-select{flex:1 1 58%;width:58%;max-width:58%}
+.pc-selectors .pc-year-select{flex:1 1 42%;width:42%;max-width:42%}
+.pc-week,.pc-days{column-gap:5px;row-gap:5px}
+.pc-week span{display:flex;align-items:center;justify-content:center;min-height:30px;padding:3px 0;line-height:1.4}
+.pc-days button{display:flex;align-items:center;justify-content:center;width:100%;min-width:0;min-height:36px;padding:6px 2px;line-height:1.4;white-space:nowrap}
+.pc-empty{min-height:36px}
+.pc-foot{gap:8px;margin-top:12px}
+.pc-foot button{min-height:34px;padding:7px 11px;line-height:1.4}
+
+/* Screenshot fix: give Persian month/year labels enough room and keep native select arrows from clipping text. */
+.persian-calendar-container .persian-calendar-popup{width:min(350px,calc(100vw - 32px));max-width:calc(100vw - 32px);padding:14px}
+.persian-calendar-popup .pc-head{display:flex;align-items:center;gap:7px}
+.persian-calendar-popup .pc-head>[data-step]{flex:0 0 36px;min-width:36px}
+.persian-calendar-popup .pc-selectors{flex:1 1 auto;width:auto;min-width:0;gap:7px}
+.persian-calendar-popup .pc-selectors select{display:block;box-sizing:border-box;height:42px;min-width:0;padding:7px 20px 7px 8px;text-align:center;text-overflow:clip;white-space:nowrap;direction:rtl}
+.persian-calendar-popup .pc-selectors .pc-month-select{flex:1 1 58%;width:58%;max-width:none}
+.persian-calendar-popup .pc-selectors .pc-year-select{flex:1 1 42%;width:42%;max-width:none}
+.persian-calendar-popup .pc-selectors option{direction:rtl;text-align:center}
